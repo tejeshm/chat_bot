@@ -1,0 +1,18 @@
+{
+  "name": "new_bot",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "botpress": "1.x",
+    "botpress-api.ai": "^2.1.7",
+    "botpress-web": "1.x"
+  },
+  "scripts": {
+    "start": "botpress start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Botpress Proprietary License"
+}
