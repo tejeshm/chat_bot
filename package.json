@@ -5,9 +5,12 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.17.1",
-    "botpress": "1.x",
+    "botpress": "^1.1.13",
     "botpress-api.ai": "^2.1.7",
-    "botpress-web": "1.x"
+    "botpress-hitl": "^1.0.10",
+    "botpress-platform-webchat": "^0.4.7",
+    "botpress-web": "1.x",
+    "dotenv": "^5.0.1"
   },
   "scripts": {
     "start": "botpress start",

@@ -1,41 +1,34 @@
-var axios = require('axios');
 
-module.exports = function login(data, success, failure) {
+const AUTHKEY = 'auth_token';
 
-    axios({
-        method: 'POST',
-        url:   'http://pp25.payumoney.com/auth/op/registerUserViaReferral',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        noAuthorizeCheck: true ,
-        data: xwwwfurlenc(data),
-    }).then((responseData) => {
+module.exports = {
 
-        if (responseData.data.status == 0) {
-            var mId = responseData.data.result.adminMerchantId;
-            global.Authorization = responseData.data.result.userVal;
-            console.log(global.Authorization);
-            success(mId);
-        } else {
-            failure(responseData.data.msg)
-        }
+    _bp:  null,
 
-    }).catch((response) => {
-            console.log(response);
-    });
-}
+    _authHeader : null,
 
-var xwwwfurlenc = function (srcjson){
-    if(typeof srcjson !== "object")
-        if(typeof console !== "undefined"){
-            console.log("\"srcjson\" is not a JSON object");
-            return null;
-        }
-    u = encodeURIComponent;
-    var urljson = "";
-    var keys = Object.keys(srcjson);
-    for(var i=0; i <keys.length; i++){
-        urljson += (keys[i]) + "=" + (srcjson[keys[i]]);
-        if(i < (keys.length-1))urljson+="&";
+    setBp: function(bp){
+        this._bp = bp;
+    },
+
+    login : function (user, token) {
+        this._authHeader = token;
+        return this._bp.users.tag(user.userId, AUTHKEY, token);
+    },
+
+    isLoggedin: function (user) {
+        /*return new Promise((resolve, reject) => {
+            resolve (this._authHeader != null ? true : false);
+        });*/
+        //return this._authHeader ? true : false
+        return this._bp.users.hasTag(user.userId, AUTHKEY);
+    },
+
+    getAuthHeader: function (user) {
+        return this._bp.users.getTag(user.userId, AUTHKEY);
+    },
+
+    logout: function (user) {
+        this._bp.users.untag(user.userId, AUTHKEY)
     }
-    return urljson;
 }

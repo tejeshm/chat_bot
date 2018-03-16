@@ -20,3 +20,45 @@ goodbye:
 dialogFlow:
   - typing: 2s
     text: {{reason}}
+
+optins:
+  - select:
+      label: Select one item
+      name: select
+      placeholder: Select one option
+      options:
+        - option:
+            label: "Hindu (Indian) vegetarian"
+            value: "hindu"
+        - option:
+            label: "Strict vegan"
+            value: "vegan"
+        - option:
+            label: "Kosher"
+            value: "kosher"
+        - option:
+            label: "Just put it in a burrito"
+            value: "burrito"
+
+introOptions:
+  - text: Please select an option.
+    quick_replies:
+      - <.B1> Create a payment link #Starting with a '.' before B1 will prepend the name of the bloc in uppercase
+      - <.B2> Update Bank details
+
+confirmation:
+  - text: This is text with Quick Replies
+    quick_replies:
+      - <.B1> yes
+      - <.B2> no
+
+bankDetails:
+  - typing: 2s
+  - text: Bank name - {{bankName}}
+  - text: IFSC - {{ifscCode}}
+  - text: Account number - {{number}}
+
+
+pennyDropPending:
+  - typing: 3s
+  - text: Please verify the penny to start recieving settlements
